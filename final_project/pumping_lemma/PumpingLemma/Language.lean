@@ -1,14 +1,20 @@
 -- Language.lean
 -- Foundational types: alphabets, words, languages, and word operations.
 --
--- TODO:
---   - Define `Word α` as `List α` (or just use List α directly throughout)
---   - Define `Language α` as `Set (List α)`
---   - Define word power: `w ^ n` = w concatenated n times
---     (Lean's List doesn't have this by default; define it by recursion on n)
---   - Prove basic word power lemmas:
---       · pow_zero  : w ^ 0 = []
---       · pow_succ  : w ^ (n+1) = w ++ w ^ n
---       · pow_append: x ++ y ^ i ++ z membership rewrites
-
 import Mathlib
+
+abbrev Word (α : Type) := List α
+abbrev Lang (α : Type) := Set (Word α)
+
+def word_pow (w : Word α) : ℕ -> Word α
+  | 0 => []
+  | n + 1 => w ++ word_pow w n
+
+instance : HPow (Word α) ℕ (Word α) where
+  hPow := word_pow
+
+theorem zero_power (w : Word α) : w ^ 0 = [] := by
+  rfl
+
+theorem succ_power (w : Word α) : w ^ (n + 1) = w ++ w ^ n := by
+  rfl
