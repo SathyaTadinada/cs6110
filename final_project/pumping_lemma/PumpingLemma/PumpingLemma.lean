@@ -29,3 +29,16 @@ import PumpingLemma.Language
 import PumpingLemma.DFA
 import PumpingLemma.Regular
 import PumpingLemma.Pigeonhole
+
+/-- If M loops at state q on word y, then it loops on y^n for any n. -/
+private theorem run_pow_of_loop {α σ : Type} (M : DFA α σ) (q : σ) (y : Word α)
+    (hloop : M.run q y = q) : ∀ n : ℕ, M.run q (y ^ n) = q := by
+  intro n
+  induction n with
+  | zero =>
+    simp [zero_power]
+  | succ k ih =>
+    rw [succ_power]
+    rw [DFA.run_append]
+    rw [hloop]
+    exact ih
