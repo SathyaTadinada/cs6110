@@ -24,8 +24,7 @@
 --        = M.run q z                   -- y is a loop at q (run q y = q)
 --        = M.run M.start w's final state, which is in M.accept.
 
-import Mathlib.Data.Fintype.Card      -- for Fintype.card σ (the pumping length)
-import Mathlib.Data.Fintype.Basic     -- for Fintype.exists_ne_map_eq_of_card_lt (pigeonhole)
+import Mathlib.Data.Fintype.Card  -- Fintype.card, card_pos_iff
 import PumpingLemma.Language
 import PumpingLemma.DFA
 import PumpingLemma.Regular
