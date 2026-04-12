@@ -92,16 +92,15 @@ theorem pumping_lemma {α : Type} (L : Set (List α)) (hL : IsRegular L) :
   have hloop : M.run q y = q := by
     have h1 : M.stateAt w ⟨i, hi⟩ = q := rfl
     have h2 : M.stateAt w ⟨j, hj⟩ = M.run q y := by
-      show M.run M.start (w.take j) = M.run q y
+      change M.run M.start (w.take j) = M.run q y
       rw [htakej, DFA.run_append]
     rw [← h2, ← hstates, h1]
   -- M.run q z is accepting
   have hqz_acc : M.run q z ∈ M.accept := by
     have heq : M.run M.start w = M.run q z := by
       conv_lhs => rw [hwxyz]
-      show M.run M.start ((x ++ y) ++ z) = M.run q z
       rw [DFA.run_append, DFA.run_append]
-      show M.run (M.run q y) z = M.run q z
+      change M.run (M.run q y) z = M.run q z
       rw [hloop]
     rw [← heq]; exact hacc
   -- y ≠ []
@@ -113,10 +112,9 @@ theorem pumping_lemma {α : Type} (L : Set (List α)) (hL : IsRegular L) :
   have hpump : ∀ n : ℕ, x ++ y ^ n ++ z ∈ L := by
     intro n
     rw [← hM]
-    show M.run M.start (x ++ y ^ n ++ z) ∈ M.accept
-    show M.run M.start ((x ++ y ^ n) ++ z) ∈ M.accept
+    change M.run M.start (x ++ y ^ n ++ z) ∈ M.accept
     rw [DFA.run_append, DFA.run_append]
-    show M.run (M.run q (y ^ n)) z ∈ M.accept
+    change M.run (M.run q (y ^ n)) z ∈ M.accept
     rw [run_pow_of_loop M q y hloop n]
     exact hqz_acc
   exact ⟨x, y, z, hwxyz, hyne, hxyp, hpump⟩
