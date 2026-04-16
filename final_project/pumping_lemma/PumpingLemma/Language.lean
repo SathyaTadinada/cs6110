@@ -1,9 +1,4 @@
--- Language.lean
--- Foundational types: alphabets, words, languages, and word operations.
---
--- We use a targeted Mathlib import (Set.Basic) rather than `import Mathlib`
--- to get `Set` and `ℕ` without pulling in Mathlib.Computability.DFA, which
--- would conflict with our own DFA definition in DFA.lean.
+-- avoid importing Mathlib.Computability.DFA which conflicts with our own
 import Mathlib.Data.Set.Basic
 
 abbrev Word (α : Type) := List α
