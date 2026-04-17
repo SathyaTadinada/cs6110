@@ -132,12 +132,33 @@ modeling DFAs and proving the pumping lemma. However, we have laid a solid
 foundation for future work in these areas, and we hope to explore them in
 future steps of our project.
 
+// Give a worked example of your project code in action. Use pictures or
+// codeblocks. Describe a motivating instance, explain what should happen, and
+// show what your code achieves.
 = Demo
-Give a worked example of your project code in action. Use pictures or codeblocks. Describe a motivating instance, explain what should happen, and show what your code achieves.
+The demonstration of our project is relatively straightforward, as we have
+successfully implemented the pumping lemma for regular languages in Lean. Our
+proof can be known to be correct by construction simply by building the Lean
+project and verifying that it compiles without errors. Below is a brief
+walkthrough of how to run the demo and verify the proof.
+
+Our project is hosted on GitHub under `SathyaTadinada/cs6110`. Clone the
+project, `cd` into the project directory (`final_project/pumping_lemma`), and
+run `lake build PumpingLemma.lean` to build the project and verify that the
+proof of the pumping lemma compiles successfully. If the build process
+completes without any errors, it indicates that our proof is correct and that
+our model of DFAs in Lean is robust enough to capture the necessary properties
+of regular languages. Below is a screenshot of the terminal output after
+successfully building the project:
+#image("lake_build.png")
+
+Furthermore, we do not rely on `sorry` within our proof. This can be easily
+verified by grepping for `sorry` in our codebase and confirming that it does
+not appear. This means that our proof is complete and does not contain any
+unproven assumptions or placeholders.
 
 = Implementation
 Explain how the code works to support the demo in particular and in general.
-
 
 = Future Work
 List next steps for the project.
