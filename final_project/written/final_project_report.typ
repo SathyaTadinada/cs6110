@@ -34,7 +34,6 @@
 //   few more weeks of successful research.
 // - Simon Peyton Jones recommends writing a wishlist intro before starting any
 //   research project
-
 = Introduction
 Our general problem is to model finite-state machines (FSMs) in the Lean proof
 assistant. FSMs are a fundamental concept in theoretical computer science, used
@@ -99,8 +98,39 @@ Additionally, we hope to explore further properties of regular languages and
 potentially extend our model to include non-deterministic finite automata
 (NFAs) and their equivalence to DFAs.
 
+// Explain the current project status relative to the ideal contributions. What
+// works? What's next? Keep it brief. The purpose of this section is to set
+// expectations for the rest of the document (for me at least, but perhaps for
+// your advisor too!).
 = Status
-Explain the current project status relative to the ideal contributions. What works? What's next? Keep it brief. The purpose of this section is to set expectations for the rest of the document (for me at least, but perhaps for your advisor too!).
+We have successfully defined a formal representation of deterministic finite
+automata (DFA) in Lean, including the necessary components such as states,
+input alphabet, transition function, start state, and accepting states. We have
+also implemented the language recognition function for our DFA model, allowing
+us to determine whether a given string is accepted by a DFA. Additionally, we
+have completed the proof of the pumping lemma for regular languages using our
+DFA model in Lean. This demonstrates that our model is robust enough to capture
+important properties of regular languages and allows us to formally verify the
+pumping lemma.
+
+The primary deliverable of our project is the formal proof of the pumping
+lemma, which is a crucial tool for proving that certain languages are not
+regular. The statement of the pumping lemma in our Lean code is as follows:
+```lean
+theorem pumping_lemma {α : Type} (L : Lang α) (hL : IsRegular L) :
+    ∃ p > 0, ∀ w ∈ L, p ≤ w.length →
+      ∃ x y z : Word α,
+        w = x ++ y ++ z ∧
+        y ≠ [] ∧
+        (x ++ y).length ≤ p ∧
+        ∀ i : ℕ, x ++ y ^ i ++ z ∈ L
+```
+
+We did not extend our model to include non-deterministic finite automata (NFAs)
+or explore further properties of regular languages, as our primary focus was on
+modeling DFAs and proving the pumping lemma. However, we have laid a solid
+foundation for future work in these areas, and we hope to explore them in
+future steps of our project.
 
 = Demo
 Give a worked example of your project code in action. Use pictures or codeblocks. Describe a motivating instance, explain what should happen, and show what your code achieves.
