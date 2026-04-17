@@ -17,9 +17,9 @@ private theorem run_pow_of_loop {α σ : Type} (M : DFA α σ) (q : σ) (y : Wor
     rw [hloop]
     exact ih
 
-theorem pumping_lemma {α : Type} (L : Set (List α)) (hL : IsRegular L) :
+theorem pumping_lemma {α : Type} (L : Lang α) (hL : IsRegular L) :
     ∃ p > 0, ∀ w ∈ L, p ≤ w.length →
-      ∃ x y z : List α,
+      ∃ x y z : Word α,
         w = x ++ y ++ z ∧
         y ≠ [] ∧
         (x ++ y).length ≤ p ∧
