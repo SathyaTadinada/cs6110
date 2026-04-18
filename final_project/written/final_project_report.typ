@@ -160,10 +160,54 @@ unproven assumptions or placeholders.
 = Implementation
 Explain how the code works to support the demo in particular and in general.
 
+// List next steps for the project.
+// - If you completed all your goals, this can be a quick 1-2 sentence section.
+//   E.g., "I'm done"; "Next step is to write a paper"
+// - If not, outline how you would approach each next step. Which tasks seem
+//   straightforward, and which are less clear? Does your current code need
+//   fundamental changes?
 = Future Work
-List next steps for the project.
-- If you completed all your goals, this can be a quick 1-2 sentence section. E.g., "I'm done"; "Next step is to write a paper"
-- If not, outline how you would approach each next step. Which tasks seem straightforward, and which are less clear? Does your current code need fundamental changes?
+Our primary goal of modeling finite-state automata (FSMs) in Lean and proving
+the pumping lemma for regular languages has been successfully achieved.
+However, there are several potential next steps for our project that we could
+explore in the future. One natural extension would be to model
+non-deterministic finite automata (NFAs) in Lean and prove their equivalence to
+DFAs. This would involve defining a formal representation of NFAs, including
+their transition function, which allows for multiple possible next states for a
+given input symbol. We would then need to implement the subset construction
+algorithm to convert an NFA into an equivalent DFA and prove that the languages
+recognized by both automata are the same. This would further demonstrate the
+robustness of our FSM model in Lean and allow us to explore more complex
+properties of regular languages.
+
+Additionally, we could explore other properties of regular languages. There are
+many useful closure properties on regular languages, such as closure under
+union, intersection, and complementation. We could formalize and prove these
+properties in Lean using our DFA model. This would involve defining the
+operations for combining DFAs to recognize the union or intersection of
+languages and proving that the resulting automata correctly recognize the
+intended languages. Proving closure under complementation would involve
+constructing a DFA that recognizes the complement of a given regular language
+and verifying its correctness.
+
+Another goal would be to formalize and prove other important theorems in
+automata theory. It would be useful to work with automata that don't model
+regular languages (such as push-down automata for context-free languages or
+Turing machines for recognizable languages) and explore their properties and
+relationships to regular languages. For example, we could investigate the
+pumping lemma for context-free languages. This would involve defining push-down
+automata in Lean and proving the necessary conditions for a language to be
+context-free. It would also be useful to prove that the expressiveness of the
+language hierarchy is strictly increasing; i.e., regular languages can be
+modeled by context-free languages, which can be modeled by recognizable
+languages, but not vice versa. This would involve proving that there are
+languages that can be recognized by push-down automata but not by finite
+automata, and that there are languages that can be recognized by Turing
+machines but not by push-down automata.
+
+Overall, while we have achieved our primary goals, there are many directions
+for future work that could further enhance our understanding of automata theory
+and the capabilities of our FSM model in Lean.
 
 = Discussion
 Pretend that you will take a 1 year break, then come back to this project. Write notes that would be useful for your future self.
