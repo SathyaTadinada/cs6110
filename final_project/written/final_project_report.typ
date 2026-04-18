@@ -268,7 +268,51 @@ Overall, while we have achieved our primary goals, there are many directions
 for future work that could further enhance our understanding of automata theory
 and the capabilities of our FSM model in Lean.
 
+// Pretend that you will take a 1 year break, then come back to this project.
+// Write notes that would be useful for your future self.
+// - Example questions to answer: What did you learn from the project? What
+//   challenges did you face? How did you overcome or avoid the challenges?
+//   What would you do differently if you could start over?
+// - You can discuss some of these questions or write your own reflections.
 = Discussion
-Pretend that you will take a 1 year break, then come back to this project. Write notes that would be useful for your future self.
-- Example questions to answer: What did you learn from the project? What challenges did you face? How did you overcome or avoid the challenges? What would you do differently if you could start over?
-- You can discuss some of these questions or write your own reflections.
+This project was a valuable learning experience in modeling theoretical
+computer science concepts in a proof assistant like Lean. We learned how to
+represent finite-state automata (FSM in Lean, which required us to carefully
+design our definitions to be both mathematically sound and compatible with
+Lean's type system. We also gained experience in proving properties of regular
+languages, such as the pumping lemma, using our formal model.
+
+One of the main challenges we faced was adapting traditional mathematical
+definitions and proofs to fit within Lean's framework, which often required us
+to think differently about how to represent concepts like languages and
+automata. We overcame these challenges by iteratively refining our definitions
+and leveraging existing lemmas and theorems from the Lean math library when
+appropriate. If we were to start over, we might spend more time upfront
+designing our definitions and considering how they would interact with Lean's
+type system, which could potentially save time in the long run. Overall, this
+project has deepened our understanding of both automata theory and formal
+verification, and has provided us with a solid foundation for future work in
+this area.
+
+We also definitely came at Lean with a faulty mindset, expecting to be able to
+directly translate traditional mathematical definitions and proofs into Lean
+code. However, we quickly realized that this approach was not effective, and
+that we needed to adapt our thinking to fit within Lean's framework. We both
+had issues trying to find good (or even passable) documentation for Lean, which
+made it difficult to get started and to understand how to use certain features
+of the language. We tried to rely heavily on the Lean compiler to produce
+useful output to orient our proofs in the correct direction, which it
+unfortunately was not able to do very effectively. If we were to start over, we
+would likely spend more time exploring the Lean documentation and community
+resources before diving into coding, which could help us to avoid some of the
+initial confusion and frustration we experienced. 
+
+Overall, we came away with the impression that Lean is a powerful tool with a
+somewhat lacking developer experience. It has a steep learning curve, and the
+documentation could be improved to make it more accessible to newcomers.
+However, once we were able to get past the initial hurdles, we found that Lean
+allowed us to formally verify our proofs in a way that was both rigorous and
+satisfying. We would recommend that future students interested in using Lean
+for similar projects spend time familiarizing themselves with the language and
+its ecosystem before starting their project, as this can help to mitigate some
+of the challenges we faced.
