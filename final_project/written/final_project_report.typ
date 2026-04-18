@@ -23,6 +23,10 @@
   bibliography: bibliography("final_project_report.bib"),
 )
 
+#set text(
+  size: 11pt
+)
+
 // Describe the problem, explain why it is important, and outline your approach
 // to solving the problem. Cite related work where applicable. List the ideal
 // contributions you would hope to achieve, regardless of where your project
@@ -157,8 +161,63 @@ verified by grepping for `sorry` in our codebase and confirming that it does
 not appear. This means that our proof is complete and does not contain any
 unproven assumptions or placeholders.
 
+// Explain how the code works to support the demo in particular and in general.
 = Implementation
-Explain how the code works to support the demo in particular and in general.
+Our work in this project was split across five files: `Language.lean`,
+`DFA.lean`, `Regular.lean`, `Pigeonhole.lean`, and `PumpingLemma.lean`. The
+first three files define the necessary components of our model of finite-state
+automata (FSMs) in Lean, while the last two files contain the proof of the
+pumping lemma for regular languages.
+
+In `Language.lean`, we define the concept of a language as a set of strings
+over an alphabet. We also define the notion of a word, which is a list of
+symbols from the alphabet, and provide basic operations for working with
+languages and words. Under the hood, we represent languages as sets of words,
+and words as lists parameterized by the type of symbols in the alphabet. This
+was a sticking point when starting the project, as traditional mathematics
+define everything in terms of sets, but in Lean, it is more natural to work
+with types and functions. Many of the places where we would have used a set
+were instead replaced by being described by a type. We had to carefully design
+our definitions to ensure that they were both mathematically sound and
+compatible with Lean's type system.
+
+Our `DFA.lean` file defines the structure of a deterministic finite automaton
+(DFA) in Lean. We define a DFA as a structure that includes a transition
+function, a start state, and a set of accepting states. Instead of coding the
+input alphabet and set of states within the DFA structure, we parameterize the
+DFA over two types, which are represent the above. This follows previous
+(unfinished) work on modeling DFAs @martin25, and is idiomatic Lean style. We
+also implement the language recognition function for our DFA model, which takes
+a string as input and determines whether it is accepted by the DFA.
+
+Our `Regular.lean` file defines the concept of regular languages and provides a
+way to determine whether a given language is regular by checking if there
+exists a DFA that recognizes it.
+
+Our `Pigeonhole.lean` file contains the proof of the pigeonhole principle,
+which is a key component of the proof of the pumping lemma. The pigeonhole
+principle states that if you have $n$ containers and more than $n$ items to
+place in those containers, then at least one container must contain more than
+one item. This principle is used in the proof of the pumping lemma to show that
+if a string is long enough, it must revisit a state in the DFA, which allows us
+to decompose the string into parts that can be "pumped". Proving this
+constructively was admittedly more difficult than the traditional method (proof
+by contradiction). We had to yield two indices $i <= j$ such that the DFA would
+be in the same state at index $i$ and $j$. We ended up using a proof of the
+pigeonhole principle for finite sets from `Mathlib` to yield these indices,
+which was a bit of a black box. However, we verified that the conditions for
+using this lemma were satisfied in our proof, and it allowed us to complete the
+proof of the pumping lemma in a constructive manner.
+
+Finally, our `PumpingLemma.lean` file contains the formal proof of the pumping
+lemma for regular languages using our model of DFAs in Lean. The proof follows
+the traditional approach, using the pigeonhole principle to show that any
+sufficiently long string accepted by a DFA can be decomposed into parts that
+satisfy the conditions of the pumping lemma. We use the aforementioned $i$ and
+$j$ indices as the endpoints of the `y` part of the string, which is the part
+that can be "pumped". We then verify that the `y` part may be "pumped" (i.e.,
+repeated any number of times) while still being accepted by the DFA, which
+completes the proof of the pumping lemma.
 
 // List next steps for the project.
 // - If you completed all your goals, this can be a quick 1-2 sentence section.
