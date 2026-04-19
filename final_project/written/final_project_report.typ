@@ -1,5 +1,11 @@
 #import "@preview/charged-ieee:0.1.4": ieee
 
+#set page(
+  footer: context {
+    align(center)[#counter(page).display("1")]
+  },
+)
+
 #show: ieee.with(
   title: [Modeling Finite-State Automata in Lean],
   abstract: [
@@ -24,8 +30,10 @@
 )
 
 #set text(
-  size: 11pt
+  size: 11pt,
 )
+
+#counter(page).update(1)
 
 // Describe the problem, explain why it is important, and outline your approach
 // to solving the problem. Cite related work where applicable. List the ideal
@@ -55,15 +63,15 @@ languages, which will enable us to prove that certain languages cannot be
 recognized by any DFA.
 
 To briefly recap the problem statement, we'll summarize Michael Sipser's
-"Introduction to the Theory of Computation" and the relevant sections on finite
+_Introduction to the Theory of Computation_ and the relevant sections on finite
 automata and the pumping lemma @sipser97. A DFA is defined as a 5-tuple $(Q,
-Sigma, delta, q_0, F)$, where
+  Sigma, delta, q_0, F)$, where
 1. $Q$ is a finite set of states,
 2. $Sigma$ is a finite input alphabet,
 3. $delta: Q times Sigma -> Q$ is the transition function, which maps a state
-   and an input symbol to a next state,
+  and an input symbol to a next state,
 4. $q_0 in Q$ is the start state, and
-5. $F subset Q$ is the set of accepting states.
+5. $F subset.eq Q$ is the set of accepting states.
 
 Computation proceeds by "running" a string on a DFA and checking if it is
 accepted. We say that a DFA $M = (Q, Sigma, delta, q_0, F)$ _accepts_ a string
@@ -74,7 +82,7 @@ if
 
 A language is a set of strings over an alphabet. A language is _regular_ if
 there exists a DFA that accepts exactly the strings in that language. The
-pumping lemma provides a necessary condition for a language to be regular,
+pumping lemma provides a necessary (but not sufficient) condition for a language to be regular,
 which can be used to show that certain languages are not regular by
 demonstrating that they do not satisfy the conditions of the lemma.
 
@@ -107,8 +115,8 @@ potentially extend our model to include non-deterministic finite automata
 // expectations for the rest of the document (for me at least, but perhaps for
 // your advisor too!).
 = Status
-We have successfully defined a formal representation of deterministic finite
-automata (DFA) in Lean, including the necessary components such as states,
+We have successfully defined a formal representation of a deterministic finite
+automaton (DFA) in Lean, including the necessary components such as states,
 input alphabet, transition function, start state, and accepting states. We have
 also implemented the language recognition function for our DFA model, allowing
 us to determine whether a given string is accepted by a DFA. Additionally, we
@@ -157,7 +165,7 @@ successfully building the project:
 #image("lake_build.png")
 
 Furthermore, we do not rely on `sorry` within our proof. This can be easily
-verified by grepping for `sorry` in our codebase and confirming that it does
+verified by using `grep` to search for `sorry` in our codebase and confirming that it does
 not appear. This means that our proof is complete and does not contain any
 unproven assumptions or placeholders.
 
@@ -289,7 +297,7 @@ automata. We overcame these challenges by iteratively refining our definitions
 and leveraging existing lemmas and theorems from the Lean math library when
 appropriate. If we were to start over, we might spend more time upfront
 designing our definitions and considering how they would interact with Lean's
-type system, which could potentially save time in the long run. Overall, this
+type system, which could potentially save time in the long run. As a whole, this
 project has deepened our understanding of both automata theory and formal
 verification, and has provided us with a solid foundation for future work in
 this area.
@@ -305,7 +313,7 @@ useful output to orient our proofs in the correct direction, which it
 unfortunately was not able to do very effectively. If we were to start over, we
 would likely spend more time exploring the Lean documentation and community
 resources before diving into coding, which could help us to avoid some of the
-initial confusion and frustration we experienced. 
+initial confusion and frustration we experienced.
 
 Overall, we came away with the impression that Lean is a powerful tool with a
 somewhat lacking developer experience. It has a steep learning curve, and the
