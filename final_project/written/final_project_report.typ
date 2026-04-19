@@ -82,9 +82,10 @@ if
 
 A language is a set of strings over an alphabet. A language is _regular_ if
 there exists a DFA that accepts exactly the strings in that language. The
-pumping lemma provides a necessary (but not sufficient) condition for a language to be regular,
-which can be used to show that certain languages are not regular by
-demonstrating that they do not satisfy the conditions of the lemma.
+pumping lemma provides a necessary (but not sufficient) condition for a
+language to be regular, which can be used to show that certain languages are
+not regular by demonstrating that they do not satisfy the conditions of the
+lemma.
 
 The pumping lemma states that for any regular language $L$, there exists a
 pumping length $p$ such that any string $s$ in $L$ with length at least $p$ can
