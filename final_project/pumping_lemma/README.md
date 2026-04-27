@@ -1,13 +1,55 @@
-# pumping_lemma
+# Pumping Lemma in Lean
 
-## GitHub configuration
+This project formalizes deterministic finite automata and proves the pumping lemma for regular languages in Lean 4.
 
-To set up your new GitHub repository, follow these steps:
+The code develops a small automata-theory library from the ground up:
 
-* Under your repository name, click **Settings**.
-* In the **Actions** section of the sidebar, click "General".
-* Check the box **Allow GitHub Actions to create and approve pull requests**.
-* Click the **Pages** section of the settings sidebar.
-* In the **Source** dropdown menu, select "GitHub Actions".
+- `Language.lean` defines words and languages.
+- `DFA.lean` defines deterministic finite automata, their transition semantics, and language acceptance.
+- `Regular.lean` defines regular languages as those recognized by some finite DFA.
+- `Pigeonhole.lean` proves the key pigeonhole argument used in the pumping lemma proof.
+- `PumpingLemma.lean` contains the main theorem proving the pumping lemma for regular languages.
 
-After following the steps above, you can remove this section from the README file.
+The top-level `PumpingLemma.lean` file imports the library modules so the project can be built as a single Lean target.
+
+## Main Result
+
+The central theorem is:
+
+```lean
+theorem pumping_lemma {α : Type} (L : Lang α) (hL : IsRegular L) :
+		∃ p > 0, ∀ w ∈ L, p ≤ w.length →
+			∃ x y z : Word α,
+				w = x ++ y ++ z ∧
+				y ≠ [] ∧
+				(x ++ y).length ≤ p ∧
+				∀ i : ℕ, x ++ y ^ i ++ z ∈ L
+```
+
+Informally, if a language is regular, then every sufficiently long word in the language can be split into `x`, `y`, and `z` so that the middle part `y` can be repeated any number of times and the resulting word stays in the language.
+
+## Building
+
+The project uses Mathlib and Lake. From the `pumping_lemma/` directory, build the project with:
+
+```bash
+lake build
+```
+
+You can also build the main file directly:
+
+```bash
+lake build PumpingLemma.lean
+```
+
+## Repository Layout
+
+- `PumpingLemma/` contains the Lean development.
+- `written/` contains the project report and proposal in Typst.
+- `lakefile.toml` and `lake-manifest.json` configure the Lean package.
+- `lean-toolchain` pins the Lean version used by the project.
+
+## Notes
+
+- The proof is intended to compile without `sorry`.
+- The formalization follows the standard DFA-based proof of the pumping lemma, using a pigeonhole argument on visited states.
